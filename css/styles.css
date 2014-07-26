@@ -1,0 +1,25 @@
+#canvas{
+    width:	1000px;
+    height:	500px;
+    margin: 0 auto;
+    top: 100px;
+    display: block;
+    border: 2px solid black;
+}
+h1{
+    font-family: Tahoma;
+    text-align: center;
+}
+
+#game_div {
+    width: 800px;
+    height: 480px;
+    margin: auto;
+    margin-top: 30px;
+}
+h2{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
