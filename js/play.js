@@ -29,6 +29,9 @@ var play_state = {
 		this.scoreText = this.game.add.text(300,10, "Score: 0", textStyle);
 		this.liveText = this.game.add.text(10,10, "Level: 1 - Lives: 2 - Laser CD: 200ms", textStyle);
 		this.castleHPText = this.game.add.text(400,10, "Castle HP: 20/20", textStyle);
+
+        // define input handler
+        inputHandler = new KeyboardHandler(this.game.input.keyboard);
 	},
 
 	update: function() {
@@ -60,30 +63,24 @@ var play_state = {
 	},
 	
 	inputHandle: function() {
-        var $this = this;
-		if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-			if (player.x >= player.width/2) player.x -= shipSpeed;
-		}
-		if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-			if (player.x <= game.world.width - player.width/2) player.x += shipSpeed;
-		}
-		if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-			if (player.y >= player.height/2 + 45) player.y -= shipSpeed;
-		}
-		if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-			if (player.y <= game.world.height - player.height/2) player.y += shipSpeed;
-		}
-		if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-			if  (this.laserTimer  > laserFireCD) {
-				this.playerFire();
-				this.laserTimer  = 0;
-			}
-		}
-		if (this.game.input.keyboard.isDown(Phaser.Keyboard.ESC)) {
-			//this.killAllEnemies();
-		}
-        // let the Leap Controller (controller) handle the input by hands
-        handleInputByLeapController(this, player, controller);
+        if (inputHandler.fireLaser()){
+            if  (this.laserTimer  > laserFireCD) {
+                this.playerFire();
+                this.laserTimer  = 0;
+            }
+        }
+        if (inputHandler.moveLeft()){
+            if (player.x >= player.width/2) player.x -= shipSpeed;
+        }
+        if (inputHandler.moveRight()){
+            if (player.x <= game.world.width - player.width/2) player.x += shipSpeed;
+        }
+        if (inputHandler.moveUp()){
+            if (player.y >= player.height/2 + 45) player.y -= shipSpeed;
+        }
+        if (inputHandler.moveDown()){
+            if (player.y <= game.world.height - player.height/2) player.y += shipSpeed;
+        }
 	},
 	
 	updateLasers: function() {

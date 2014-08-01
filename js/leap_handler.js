@@ -1,8 +1,41 @@
+var LeapControllerHandler = function() {
+    // creates a new Leap Controller object
+    this.controller = new Leap.Controller();
+    // connect the controller with the web socket
+    this.controller.connect();
+    this.fireLaser = function () {
+        this.controller.on('frame', function(frame){
+            for (var i=0; i < frame.hands.length; i++){
+                // for each hand:
+                var hand = frame.hands[i];
+                // grabStrength has value from 0 to 1
+                if (hand.grabStrength == 1 ){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        });
+    }
+    this.moveLeft = function () {
+        this.controller.on('frame', function(frame){
+            for (var i=0; i < frame.hands.length; i++){
+                // for each hand:
+                var hand = frame.hands[i];
+                var handPos = leapToScene(frame, hand.palmPosition, game.world.width, game.world.height);
+
+            }
+        });
+    }
+}
+
+
 // -------------------------------------------------------------------
-// handleInputByLeapController ( frame ; leapPos )
+// handleInputByLeapController (playState, player, controller)
 // PARAMETERS:
-//            @playState (object) Input playState object
-//            @player (object) Input player object
+//            @playState (object) Input playState object created by PHASER framework
+//            @player (object) Input player object created by PHASER framework
 //            @controller (object) Input Leap Controller object
 // RETURNS:
 //            nothing

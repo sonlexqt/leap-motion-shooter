@@ -24,10 +24,16 @@ game.state.add('menu', menu_state);
 game.state.add('play', play_state);  
 game.state.add('end', end_state);
 
-// creates a new Leap Controller object
-var controller = new Leap.Controller();
-// connect the controller with the web socket
-controller.connect();
+//// creates a new Leap Controller object
+//var controller = new Leap.Controller();
+//// connect the controller with the web socket
+//controller.connect();
+
+//var inputHandler_Leap = new LeapControllerHandler();
+//inputHandler_Leap.init();
+
+//var inputHandler = new KeyboardHandler();
+//inputHandler.init();
 
 // Start with the 'init' state
 game.state.start('init');  
